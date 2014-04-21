@@ -102,7 +102,11 @@ void jogo::velha::startGame(void) {
     cout << "O jogador " << currentPlayer << " ganhou!! Parabens!! " << endl;
   else
     cout << "Velha!!!" << endl;
-
+  
+  #if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
+  system("pause");
+  #endif
+  
   return;
 }
 
