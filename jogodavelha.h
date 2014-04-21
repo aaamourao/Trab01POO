@@ -12,9 +12,11 @@
 
 #include <vector>
 #include <string>
+#include <map>
+#include <vector>
 
 namespace jogo {
-
+  
   class velha {
     private:
       std::vector< std::vector<unsigned int> > mJogo;
@@ -22,14 +24,20 @@ namespace jogo {
       std::string player1;
       std::string player2;
 
-      const bool againstIA;
+      std::vector<std::string> layout;
+      void printLayout(void);
+
+      bool againstIA;
+
+      std::map<std::string, std::string> jaJogadas;
+
+      bool vitoria(void); 
 
     public:
       velha(bool IA);
-      velha(std::string player1, std::string player2);
-      velha(std::player);
 
-      bool jogada(std::string player, unsigned int x, unsigned int y);
+      void startGame(void);
+      bool jogada(std::string, std::string);
   };
 }
 
