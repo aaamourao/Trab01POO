@@ -12,6 +12,7 @@
 #include <algorithm>
 
 #include <stdlib.h>
+#include <time.h>
 
 #include "jogodavelha.h"
 #include "jogo.h"
@@ -24,14 +25,64 @@ static const std::string cmd = "clear";
 
 using namespace std;
 
-jogo::velha::velha(bool IA) : againstIA(IA){
+jogo::velha::velha(void) {
+  string modo;
+
+  while(1) {
+    cout << "Você deseja jogar no modo versus(0) ou contra o computador(1)? ";
+    cin  >> modo;
+
+    if(modo != "0" && modo != "1")
+      cout << "Opcao invalida..." << endl;
+    else
+      break;
+  }
+
+  if(modo == "0")
+    againstIA = false;
+  else
+    againstIA = true;
+  
+  cout << "Por favor, entre com o nome do Player 1: ";
+  cin  >> player1;
+
+  if(!againstIA) {
+
+    while(1) {
+      cout << flush << "Por favor, entre com o nome do Player 2: ";
+      cin  >> player2;
+
+      if(player2 != player1)
+        break;
+      else {
+        
+        player2 += " 2";
+        break;
+      }
+    }
+  }
+  else player2 = "Computador";
+}
+
+jogo::velha::velha(bool IA) : againstIA(IA) {
 
   cout << "Por favor, entre com o nome do Player 1: ";
   cin  >> player1;
 
   if(!IA) {
-    cout << flush << "Por favor, entre com o nome do Player 2: ";
-    cin  >> player2;
+
+    while(1) {
+      cout << flush << "Por favor, entre com o nome do Player 2: ";
+      cin  >> player2;
+
+      if(player2 != player1)
+        break;
+      else {
+        
+        player2 += " 2";
+        break;
+      }
+    }
   }
   else player2 = "Computador";
 }
@@ -46,6 +97,9 @@ void jogo::velha::startGame(void) {
   bool ultJogada = true;
   unsigned int iterations = 0;
 
+  
+  srand(time(NULL));
+
   while(1) { 
    
     system(cmd.c_str());
@@ -58,9 +112,42 @@ void jogo::velha::startGame(void) {
    
     if(!ultJogada)
       disclaimer = "(Jogada invalida)" + disclaimer;
-    
-    cout << disclaimer;
-    cin  >> posicao; 
+   
+    if(!againstIA || (currentPlayer != player2)) { 
+      cout << disclaimer;
+      cin  >> posicao;
+    } 
+    else {
+      string linha;
+
+      switch(rand()%3 + 1) {
+        case 1:
+          linha = "1";
+          break;
+        case 2:
+          linha = "2";
+          break;
+        case 3:
+          linha = "3";
+          break;
+      }
+
+      string coluna;
+
+      switch(rand()%3) {
+        case 0:
+          coluna = "a";
+          break;
+        case 1:
+          coluna = "b";
+          break;
+        case 2:
+          coluna = "c";
+          break;
+      }
+
+      posicao = linha + coluna;
+    }
 
     ultJogada = jogada(currentCh, posicao);
 
@@ -95,7 +182,8 @@ void jogo::velha::startGame(void) {
       currentPlayer = player1;
     }
 
-    ++iterations;
+    if(ultJogada)
+      ++iterations;
   }
 
   if(ultJogada)
@@ -113,6 +201,7 @@ void jogo::velha::startGame(void) {
 bool jogo::velha::jogada(string chPlayer, string posicao) {
 
   bool success = true;
+
 
   if(jogo::stdGameMap.find(posicao) == jogo::stdGameMap.end()) 
     success = false;

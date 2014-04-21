@@ -32,12 +32,13 @@ namespace jogo {
       std::map<std::string, std::string> jaJogadas;
 
       bool vitoria(void); 
+      bool jogada(std::string, std::string);
 
     public:
+      velha(void);
       velha(bool IA);
 
       void startGame(void);
-      bool jogada(std::string, std::string);
   };
 }
 
