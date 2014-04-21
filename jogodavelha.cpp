@@ -25,7 +25,7 @@ static const std::string cmd = "clear";
 
 using namespace std;
 
-jogo::velha::velha(void) {
+jogo::JogoDaVelha::JogoDaVelha(void) {
   string modo;
 
   while(1) {
@@ -64,7 +64,7 @@ jogo::velha::velha(void) {
   else player2 = "Computador";
 }
 
-jogo::velha::velha(bool IA) : againstIA(IA) {
+jogo::JogoDaVelha::JogoDaVelha(bool IA) : againstIA(IA) {
 
   cout << "Por favor, entre com o nome do Player 1: ";
   cin  >> player1;
@@ -87,7 +87,7 @@ jogo::velha::velha(bool IA) : againstIA(IA) {
   else player2 = "Computador";
 }
 
-void jogo::velha::startGame(void) {
+void jogo::JogoDaVelha::startGame(void) {
   
   layout = gameLayout;
 
@@ -198,7 +198,7 @@ void jogo::velha::startGame(void) {
   return;
 }
 
-bool jogo::velha::jogada(string chPlayer, string posicao) {
+bool jogo::JogoDaVelha::jogada(string chPlayer, string posicao) {
 
   bool success = true;
 
@@ -215,7 +215,7 @@ bool jogo::velha::jogada(string chPlayer, string posicao) {
   return success;
 }
 
-bool jogo::velha::vitoria(void) {
+bool jogo::JogoDaVelha::vitoria(void) {
   
   bool victory = false;
 
@@ -299,7 +299,7 @@ map<string, pair<unsigned int, unsigned int> > jogo::createMap() {
 }
 
 
-void jogo::velha::printLayout(void) {
+void jogo::JogoDaVelha::printLayout(void) {
  
   for(vector<string>::iterator it = layout.begin();
       it != layout.end();

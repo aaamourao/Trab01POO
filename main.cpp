@@ -13,7 +13,7 @@ using namespace std;
 
 int main(void) {
 
-  jogo::velha game;
+  jogo::JogoDaVelha game;
 
   game.startGame();  
 

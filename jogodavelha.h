@@ -17,7 +17,7 @@
 
 namespace jogo {
   
-  class velha {
+  class JogoDaVelha {
     private:
       std::vector< std::vector<unsigned int> > mJogo;
 
@@ -35,8 +35,8 @@ namespace jogo {
       bool jogada(std::string, std::string);
 
     public:
-      velha(void);
-      velha(bool IA);
+      JogoDaVelha(void);
+      JogoDaVelha(bool IA);
 
       void startGame(void);
   };
