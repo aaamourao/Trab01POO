@@ -61,7 +61,11 @@ jogo::JogoDaVelha::JogoDaVelha(void) {
       }
     }
   }
-  else player2 = "Computador";
+  else {
+    player2 = "Computador";
+
+    IA = new JogadorVirtual(player2, gameLayout);
+  }
 }
 
 jogo::JogoDaVelha::JogoDaVelha(bool IA) : againstIA(IA) {
@@ -84,7 +88,11 @@ jogo::JogoDaVelha::JogoDaVelha(bool IA) : againstIA(IA) {
       }
     }
   }
-  else player2 = "Computador";
+  else {
+    player2 = "Computador";
+
+    IA = new JogadorVirtual(player2, gameLayout);
+  }
 }
 
 void jogo::JogoDaVelha::startGame(void) {
@@ -117,37 +125,8 @@ void jogo::JogoDaVelha::startGame(void) {
       cout << disclaimer;
       cin  >> posicao;
     } 
-    else {
-      string linha;
-
-      switch(rand()%3 + 1) {
-        case 1:
-          linha = "1";
-          break;
-        case 2:
-          linha = "2";
-          break;
-        case 3:
-          linha = "3";
-          break;
-      }
-
-      string coluna;
-
-      switch(rand()%3) {
-        case 0:
-          coluna = "a";
-          break;
-        case 1:
-          coluna = "b";
-          break;
-        case 2:
-          coluna = "c";
-          break;
-      }
-
-      posicao = linha + coluna;
-    }
+    else 
+      posicao = IA->jogadaIA(layout); 
 
     ultJogada = jogada(currentCh, posicao);
 

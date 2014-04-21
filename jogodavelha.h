@@ -15,6 +15,8 @@
 #include <map>
 #include <vector>
 
+#include "jogadorvirtual.h"
+
 namespace jogo {
   
   class JogoDaVelha {
@@ -28,6 +30,7 @@ namespace jogo {
       void printLayout(void);
 
       bool againstIA;
+      JogadorVirtual *IA;
 
       std::map<std::string, std::string> jaJogadas;
 

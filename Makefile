@@ -9,14 +9,17 @@
 
 all: jogodavelha
 
-jogodavelha: main.o jogodavelha.o
-	g++ jogodavelha.o main.o -o jogodavelha 
+jogodavelha: main.o jogodavelha.o jogadorvirtual.o
+	g++ jogadorvirtual.o jogodavelha.o main.o -o jogodavelha 
 
 main.o: main.cpp
 	g++ -c main.cpp
 
-jogodavelha.o: jogodavelha.cpp
-	g++ -c jogodavelha.cpp 
+jogodavelha.o: jogodavelha.cpp 
+	g++ -c jogodavelha.cpp
+
+jogodorvirtual.o: jogadorvirtual.cpp
+	g++ -c jogodorvirtual.cpp
 
 clean: 
 	rm -rf *o .*.swp jogodavelha  
